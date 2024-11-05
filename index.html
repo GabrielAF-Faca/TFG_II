@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<style>
+button {
+text-align: center;border-radius: 100%;border: none;box-shadow: 1px 1px rgba(0, 0, 0, 0.268);
+font-weight:bold;width: 64px;height: 64px;font-size: 20px;
+}
+
+button:hover {background-color: gainsboro;}
+
+.botao_ligar{background-color: #COR_BOTAO_LIGAR#;}
+
+.botao_ligar:hover {background-color: #COR_BOTAO_HOVER#;}
+
+.dpad{flex-wrap: wrap; display: flex; position:absolute; right: 20px; bottom: 40px; width:192px;}
+
+</style>
+</head>
+
+<body style="height: 100%;">
+<form action="./ligar">
+<button class="botao_ligar"></button>
+</form>
+
+<form action="./dancar">
+<button #DISABLED#>&#9835</button>
+</form>
+
+<div style="text-align: center; position:absolute; top: 30px; left: 40%;">
+<div>BATERIA <br>
+#INDICADOR_BATERIA#</div><br>
+<form action="./trajeto">
+<input style="border:none; border-bottom: 1px solid gray; text-align: center;" name="trajeto" placeholder="Trajeto"> <br>
+<button style="border-radius: 10%; font-size: initial; width: initial; height: initial; padding: 8px; margin-top: 10px; font-weight: initial;"> Iniciar</button>
+</form>
+</div>
+
+<div class="dpad" style="right:0px; left:20px;">
+<button style="margin-right: 64px; margin-left: 64px;" id="up" #DISABLED#>&#9650</button>
+<button style="margin-bottom: 2px; margin-right: 64px;" id="left" #DISABLED#>&#9664</button>
+<button style="margin-bottom: 2px;" id="right" #DISABLED#>&#9654</button>         
+<button style="margin-right: 64px; margin-left: 64px;" id="down" #DISABLED#>&#9660</button>
+</div>
+
+<div class="dpad">
+<button style="margin-right: 64px; margin-left: 64px;" #DISABLED# onclick="mexer('levantar')">&#8613</button>    
+<button style="margin-bottom: 2px; margin-right: 64px;" id="girarEsq" #DISABLED#>&#8634</button>
+<button style="margin-bottom: 2px;" id="girarDir" #DISABLED#>&#8635</button>
+<button style="margin-right: 64px; margin-left: 64px;" id="abaixar" #DISABLED#>&#8615</button>
+</div>
+
+<script>
+let upInt, downInt, rightInt, leftInt, abaixarInt, girarInt;
+
+document.querySelector("#up").addEventListener("touchstart", up);
+document.querySelector("#up").addEventListener("touchend", cancelMove);
+
+document.querySelector("#left").addEventListener("touchstart", left);
+document.querySelector("#left").addEventListener("touchend", cancelMove);
+
+document.querySelector("#right").addEventListener("touchstart", right);
+document.querySelector("#right").addEventListener("touchend", cancelMove);
+
+document.querySelector("#down").addEventListener("touchstart", down);
+document.querySelector("#down").addEventListener("touchend", cancelMove);
+
+document.querySelector("#abaixar").addEventListener("touchstart", lower);
+document.querySelector("#abaixar").addEventListener("touchend", cancelMove);
+
+document.querySelector("#girarEsq").addEventListener("touchstart", giraEsq);
+document.querySelector("#girarEsq").addEventListener("touchend", cancelMove);
+
+document.querySelector("#girarDir").addEventListener("touchstart", giraDir);
+document.querySelector("#girarDir").addEventListener("touchend", cancelMove);
+
+function giraEsq(e){
+e.preventDefault();
+mexer("girarEsq")
+girarInt = setInterval(()=>{mexer("girarEsq")},1000);
+}
+
+function giraDir(e){
+e.preventDefault();
+mexer("girarDir")
+girarInt = setInterval(()=>{mexer("girarDir")},1000);
+}
+
+function lower(e){
+e.preventDefault();
+abaixarInt = setInterval(()=>{mexer("deitar")},100);
+}
+
+function up(e){
+e.preventDefault(); 
+mexer("frente")  
+upInt = setInterval(()=>{mexer("frente")},1000);
+}
+
+function left(e){
+e.preventDefault();
+mexer("esquerda")
+leftInt = setInterval(()=>{mexer("esquerda")},1000);
+}
+
+function right(e){
+e.preventDefault(); 
+mexer("direita")       
+rightInt = setInterval(()=>{mexer("direita")},1000);
+}
+
+function down(e){
+e.preventDefault();       
+mexer("tras")            
+downInt = setInterval(()=>{mexer("tras")},1000);
+}
+
+function cancelMove(){
+clearInterval(upInt);
+clearInterval(downInt);
+clearInterval(leftInt);
+clearInterval(rightInt);
+clearInterval(abaixarInt);
+clearInterval(girarInt);
+mexer("levantar");
+}
+
+function mexer(lado) {
+const xhr = new XMLHttpRequest();
+xhr.open("POST", lado);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xhr.send(JSON.stringify({title: "Hello World",body: lado,userId: 900,}));
+}
+
+</script>
+
+</body>
+
+</html>
+

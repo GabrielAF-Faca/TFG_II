@@ -9,14 +9,19 @@ import network
 import socket
 import utime
 
+gravando = False 
+divisor_tensao = machine.ADC(28)
 
-#bateria = ADC(29)
-#print(bateria.read_u16())
 
-pin = machine.ADC(28)
+def read_battery():
+    adc_reading  = divisor_tensao.read_u16()
+    adc_voltage = (adc_reading - 35467) / (51231 - 35467)
+    battery = adc_voltage*10
+    print(battery)
+    return math.floor(battery), battery*10
 
-def webpage(ligado, bateria):
-    #Template HTML
+
+def webpage(ligado, grav):
     
     if ligado:
         cor_ligar = 'green'
@@ -34,6 +39,12 @@ def webpage(ligado, bateria):
     
     bateria_string = ""
     
+    bateria = read_battery()
+        
+    print(bateria)
+    
+    bateria = read_battery()[0]
+    
     for i in range(bateria):
         bateria_string += "<span>&#128994</span>"
     
@@ -45,11 +56,16 @@ def webpage(ligado, bateria):
     html = html.replace("#COR_BOTAO_HOVER#", cor_hover)
     html = html.replace("#INDICADOR_BATERIA#", bateria_string)
     
+    if grav:
+        html = html.replace("#BOTAO_GRAVAR#", "Parar")
+    else:
+        html = html.replace("#BOTAO_GRAVAR#", "Iniciar")
      
     return str(html)
     #return u"".join(html).encode("utf-8")
         
 def ap_mode(ssid, password):
+    global gravando
     # Just making our internet connection
     ap = network.WLAN(network.AP_IF)
     ap.config(essid=ssid, password=password)
@@ -66,6 +82,13 @@ def ap_mode(ssid, password):
     s.listen(5)
     
     robo = None
+    
+    momento_inicio = 0
+    momento_final = 0
+    bateria_inicio = 0
+    bateria_final = 0
+    trajeto_analise = ""
+    distancia = 0
     
     while True:
         conn, addr = s.accept()
@@ -107,18 +130,25 @@ def ap_mode(ssid, password):
             robo.gira_direita()
         elif request.startswith('/trajeto'):
             tipo_trajeto = str(request).split("?trajeto=")[1].rstrip("'")
-            print(tipo_trajeto)
-            # TODO COISAS MAGICAS DEPOIS DE SELECIONAR O TRAJETO
-        print(request)
+            #print(tipo_trajeto)
+            
+            if not gravando:
+                gravando = True
+                trajeto_analise = tipo_trajeto
+                momento_inicio = utime.ticks_ms()
+                bateria_inicio = read_battery()[1]
+            else:
+                gravando = False
+                with open('./trajetos.csv', 'a') as file:
+                    momento_final = utime.ticks_ms() - momento_inicio
+                    bateria_final = read_battery()[1]
+                    distancia = tipo_trajeto
+                    
+                    file.write(f"{trajeto_analise}, {distancia}, {momento_final}, {bateria_inicio}, {bateria_final}\n")
+            
+        #print(request)
         
-        adc_reading  = pin.read_u16()
-        adc_voltage  = (adc_reading * 2.6) / 51633
-        
-        porcentagem = math.floor((adc_voltage * 10)/2.6)
-        
-        print(porcentagem)
-        
-        response = webpage(robo != None, porcentagem)
+        response = webpage(robo != None, gravando)
         conn.send(response)
         conn.close()
 
@@ -135,6 +165,7 @@ ap_mode(ssid, password)
 
 #for i in range(10):
 #    robo.andar()
+
 
 
 

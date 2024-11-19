@@ -5,6 +5,7 @@ from servo import Servo
 from perna import Perna
 
 params = {
+        'nome': 'perna1',
         'junta1':{
             'pin':18,
             'inv':True,
@@ -30,11 +31,12 @@ params = {
     }
 
 params2 = {
+        'nome': 'perna2',
         'junta1':{
             'pin':21,
             'inv':True,
             'ini_angle':90,
-            'offset':45
+            'offset':90
         },
         'junta2':{
             'pin':26,
@@ -55,8 +57,9 @@ params2 = {
     }
 
 params3 = {
+        'nome': 'perna3',
         'junta1':{
-            'pin':5,
+            'pin':4,
             'inv':False,
             'ini_angle':90,
             'offset':90
@@ -80,6 +83,7 @@ params3 = {
     }
 
 params4 = {
+        'nome': 'perna4',
         'junta1':{
             'pin':13,
             'inv':False,
@@ -182,28 +186,35 @@ class Robo:
         self.perna3.move_to_point(0, 60, 30)
         utime.sleep(1)
     
-    def frente(self):
-        self.perna2.move_to_point(90, 20, 0)
-        self.perna4.move_to_point(90, 20, 0)
-        self.perna3.move_to_point(-40, 80, 50)
-        self.perna1.move_to_point(0, 80, 50)
-        utime.sleep(0.25)
-        self.perna2.move_to_point(90, 20, 50)
-        self.perna4.move_to_point(90, 20, 50)
-        utime.sleep(0.25)
-        self.perna4.move_to_point(0, 80, 50)
-        self.perna2.move_to_point(-40, 80, 50)
-        self.perna1.move_to_point(90, 20, 0)
-        self.perna3.move_to_point(90, 20, 0)
-        utime.sleep(0.25)
+    def frente(self):        
+        delay = 0.2
+        self.perna1.move_to_point(0,0,0)
+        utime.sleep(delay/2)
         self.perna1.move_to_point(90, 20, 50)
-        self.perna3.move_to_point(90, 20, 50)
-        utime.sleep(0.25)
-
+        utime.sleep(delay)
+        self.perna2.move_to_point(0, 0, 0)
+        utime.sleep(delay/2)
+        self.perna2.move_to_point(90, 30, 20)
+        utime.sleep(delay)
+        self.perna2.move_to_point(-90, 30, 20)
+        self.perna1.move_to_point(-90, 20, 50)
+        utime.sleep(delay)
+        self.perna4.move_to_point(0, 0, 0)
+        utime.sleep(delay/2)
+        self.perna4.move_to_point(90, 20, 50)
+        utime.sleep(delay)
+        self.perna3.move_to_point(0, 0, 0)
+        utime.sleep(delay/2)
+        self.perna3.move_to_point(90, 30, 20)
+        utime.sleep(delay)
+        self.perna4.move_to_point(-90, 20, 50)
+        self.perna3.move_to_point(-90, 30, 20)
+        utime.sleep(delay)
+        
     def tras(self):
         self.perna1.move_to_point(-90, 20, 0)
         self.perna3.move_to_point(-90, 20, 0)
-        self.perna2.move_to_point(40, 80, 50)
+        self.perna2.move_to_point(0, 80, 50)
         self.perna4.move_to_point(0, 80, 50)
         utime.sleep(0.25)
         self.perna1.move_to_point(-90, 20, 50)
@@ -217,7 +228,7 @@ class Robo:
         self.perna2.move_to_point(-90, 20, 50)
         self.perna4.move_to_point(-90, 20, 50)
         utime.sleep(0.25)
-    
+            
     def direita(self):
         self.perna2.move_to_point(-90, 20, 0)
         self.perna4.move_to_point(-90, 20, 50)
@@ -268,37 +279,4 @@ class Robo:
         self.levantar()
         utime.sleep(0.25)
     
-    def testar_perna(self):
-        
-        for i in range(90):
-            try:
-                self.perna2.move_to_point(i, 0, 0)
-                utime.sleep(0.1)
-            except:
-                continue
-        
-        for i in range(90, 0, -1):
-            try:
-                self.perna2.move_to_point(i, 0, 0)
-                utime.sleep(0.1)
-            except:
-                continue
-        
-        for i in range(180):
-            try:
-                self.perna2.move_to_point(0, i, 0)
-                utime.sleep(0.1)
-            except:
-                continue
-        
-        for i in range(180, 0, -1):
-            try:
-                self.perna2.move_to_point(0, i, 0)
-                utime.sleep(0.1)
-            except:
-                continue
 
-#robo = Robo()
-#robo.perna2.j3.write(90)
-#utime.sleep(1)
-#robo.levantar()

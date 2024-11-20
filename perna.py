@@ -26,16 +26,7 @@ class Perna:
         self.j1 = Servo(j1['pin'], reverse=j1['inv'])
         self.j2 = Servo(j2['pin'], reverse=j2['inv'])
         self.j3 = Servo(j3['pin'], reverse=j3['inv'])
-        '''
-        
-        self.j1 = Servo(reverse=j1['inv'])
-        self.j2 = Servo(reverse=j2['inv'])
-        self.j3 = Servo(reverse=j3['inv'])
-        
-        self.j1.attach(j1['pin'])
-        self.j2.attach(j2['pin'])
-        self.j3.attach(j3['pin'])
-        '''
+
         self.j1.write(j1['ini_angle'])
         self.j2.write(j2['ini_angle'])
         self.j3.write(j3['ini_angle'])

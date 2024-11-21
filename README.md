@@ -1,5 +1,8 @@
 # Robô Quadrúpede Com 3 DOF Por Perna
 
+## Vídeos do funcionamento
+https://www.youtube.com/playlist?list=PLtiqwHhrwyDy4FeO3HXZ96Ta0Fswptasy
+
 ## Componentes
 Raspberry Pi Pico W <br>
 12x Servomotores MG90S <br>
@@ -51,5 +54,3 @@ Acessar o endereço 192.168.4.1 no browser web (através de smartphone)<br>
 ![image](https://github.com/user-attachments/assets/0acc3c8c-86fd-4dee-921f-6949394c9387)
 Controlar robô
 
-## Vídeos do funcionamento
-https://www.youtube.com/playlist?list=PLtiqwHhrwyDy4FeO3HXZ96Ta0Fswptasy

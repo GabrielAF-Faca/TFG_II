@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2e953979-9a14-485e-ba66-2d1186115a3a)# Robô Quadrúpede Com 3 DOF Por Perna
+# Robô Quadrúpede Com 3 DOF Por Perna
 
 ## Componentes
 Raspberry Pi Pico W <br>
@@ -44,4 +44,9 @@ Selecionar porta do Raspberry no canto inferior direito <br>
 
 Fazer Upload dos arquivos para o Raspberry <br>
 Executar código <br>
-Conectar na rede Wi-Fi do robô <br>
+Conectar na rede Wi-Fi do robô (através de smartphone)<br>
+![wifi](./Imagens/wifi.png)
+
+Acessar o endereço 192.168.4.1 no browser web (através de smartphone)<br>
+
+

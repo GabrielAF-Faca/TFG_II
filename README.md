@@ -48,5 +48,7 @@ Conectar na rede Wi-Fi do robô (através de smartphone)<br>
 ![wifi](./Imagens/wifi.png)
 
 Acessar o endereço 192.168.4.1 no browser web (através de smartphone)<br>
+![image](https://github.com/user-attachments/assets/0acc3c8c-86fd-4dee-921f-6949394c9387)
+Controlar robô
 
 

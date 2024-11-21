@@ -1,4 +1,4 @@
-# Robô Quadrúpede Com 3 DOF Por Perna
+![image](https://github.com/user-attachments/assets/2e953979-9a14-485e-ba66-2d1186115a3a)# Robô Quadrúpede Com 3 DOF Por Perna
 
 ## Componentes
 Raspberry Pi Pico W <br>
@@ -39,4 +39,9 @@ Conectar todos os motores e bateria
 Conectar Raspberry no computador através de cabo usb <br>
 Abrir o Thonny IDE <br>
 
+Selecionar porta do Raspberry no canto inferior direito <br>
+![selecionar](./Imagens/selecionar_porta.png)
 
+Fazer Upload dos arquivos para o Raspberry <br>
+Executar código <br>
+Conectar na rede Wi-Fi do robô <br>

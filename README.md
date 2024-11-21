@@ -31,3 +31,12 @@ Encaixar servomotores e parafusar (4x)<br>
 
 Encaixar Pernas nas bases e parafusar
 ![Robo](./Imagens/robo.png)
+
+Conectar todos os motores e bateria
+![Robo Montado](./Imagens/robo_montado.jpg)
+
+## Programação
+Conectar Raspberry no computador através de cabo usb <br>
+Abrir o Thonny IDE <br>
+
+
